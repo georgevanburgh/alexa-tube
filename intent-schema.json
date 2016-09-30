@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "intent": "GetLineStatus",
+      "slots": [
+        [
+          {
+            "name": "Station",
+            "type": "TFL_LINE"
+          }
+        ]
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    }
+  ]
+}
