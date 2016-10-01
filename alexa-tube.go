@@ -40,13 +40,13 @@ func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse)
 	case "GetLineStatus":
 		station, err := echoReq.GetSlotValue("Line")
 		if err != nil {
-			echoResp.OutputSpeech(ERROR_RESPONSE)
+			echoResp.OutputSpeech(ERROR_RESPONSE).EndSession(true)
 		} else {
 			echoResp.OutputSpeech(GetTubeStatusString(station)).EndSession(true)
 		}
 		break
 	default:
-		echoResp.OutputSpeech(ERROR_RESPONSE)
+		echoResp.OutputSpeech(ERROR_RESPONSE).EndSession(true)
 		break
 	}
 }
@@ -56,5 +56,5 @@ func GetTubeStatusString(givenLine string) string {
 
 	status, _ := TFL.GetStatusForLine(givenLine)
 
-	return (*status)[0].Reason
+	return (*status)[0].SeverityDescription
 }
