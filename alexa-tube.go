@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	alexa "github.com/mikeflynn/go-alexa/skillserver"
+	alexa "github.com/bsilverman/go-alexa/skillserver"
 )
 
 const (
