@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	alexa "github.com/bsilverman/go-alexa/skillserver"
+	alexa "github.com/mikeflynn/go-alexa/skillserver"
 )
 
 const (
@@ -20,8 +20,8 @@ var Applications = map[string]interface{}{
 }
 
 func main() {
-	port, err := os.LookupEnv("HTTP_PLATFORM_PORT")
-	if err {
+	port, portEnvar := os.LookupEnv("HTTP_PLATFORM_PORT")
+	if !portEnvar {
 		port = "3000" // For testing
 	}
 
