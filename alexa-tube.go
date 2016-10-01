@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	gotube "github.com/FireEater64/go-tube"
 	alexa "github.com/bsilverman/go-alexa/skillserver"
 )
 
@@ -41,11 +42,19 @@ func EchoIntentHandler(echoReq *alexa.EchoRequest, echoResp *alexa.EchoResponse)
 		if err != nil {
 			echoResp.OutputSpeech(ERROR_RESPONSE)
 		} else {
-			echoResp.OutputSpeech("You asked me about the " + station + " line").EndSession(true)
+			echoResp.OutputSpeech(GetTubeStatusString(station)).EndSession(true)
 		}
 		break
 	default:
 		echoResp.OutputSpeech(ERROR_RESPONSE)
 		break
 	}
+}
+
+func GetTubeStatusString(givenLine string) string {
+	TFL := gotube.NewTFL(os.Getenv("TFL_API_KEY"), os.Getenv("TFL_API_SECRET"))
+
+	status, _ := TFL.GetStatusForLine(givenLine)
+
+	return (*status)[0].Reason
 }
